@@ -158,20 +158,26 @@ public class MembershipControllerServlet extends HttpServlet {
                 request.setAttribute("actionMessage", "<p>Fill in all the fields: " + message + "</p>");
                 
             } else {
-                String message = "";
+                
+                // Creating JavaBean Object
+                UserInfo user = new UserInfo();
+                
+                // Setting all the fields of it
+                user.setAbout(about);
+                user.setAddress(address);
+                user.setCountry(country);
+                user.setEmail(email);
+                user.setLangs(langs);
+                user.setName(name);
+                user.setPassid(passid);
+                user.setSex(sex);
+                user.setUsername(username);
+                user.setZip(zip);
 
-                message += ("<p> name: " + name + "</p>");
-                message += ("<p> username: " + username + "</p>");
-                message += ("<p> password: " + passid + "</p>");
-                message += ("<p> address: " + address + "</p>");
-                message += ("<p> country: " + country + "</p>");
-                message += ("<p> zip: " + zip + "</p>");
-                message += ("<p> email: " + email + "</p>");
-                message += ("<p> sex: " + sex + "</p>");
-                message += ("<p> lang: " + langs + "</p>");
-                message += ("<p> description: " + about + "</p>");
-
-                request.setAttribute("actionMessage",  message);
+                request.setAttribute("UserData", user);
+                
+                getServletContext().getRequestDispatcher("/profile.jsp").forward(request, response);
+                
             }
                     
         } else {
