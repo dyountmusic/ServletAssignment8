@@ -4,6 +4,7 @@
     Author     : danielyount
 --%>
 
+<%@page import="edu.uncc.nbad.UserInfo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,15 +13,19 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <p>name: ${UserData.name}</p>
-        <p>username: ${UserData.username}</p>
-        <p>password: ${UserData.passid}</p>
-        <p>address: ${UserData.address}</p>
-        <p>country: ${UserData.country}</p>
-        <p>zip: ${UserData.zip}</p>
-        <p>email: ${UserData.email}</p>
-        <p>sex: ${UserData.sex}</p>
-        <p>lang: ${UserData.langs}</p>
-        <p>description: ${UserData.about}</p>
+        <%    
+            // read UserInfo java bean from httpSession object
+            UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        %>
+        <p>name: ${userInfo.getName()}</p>
+        <p>username: ${userInfo.getUsername()}</p>
+        <p>password: ${userInfo.getPassid()}</p>
+        <p>address: ${userInfo.getAddress()}</p>
+        <p>country: ${userInfo.getCountry()}</p>
+        <p>zip: ${userInfo.getZip()}</p>
+        <p>email: ${userInfo.getEmail()}</p>
+        <p>sex: ${userInfo.getSex()}</p>
+        <p>lang: ${userInfo.getLangs()}</p>
+        <p>description: ${userInfo.getAbout()}</p>
     </body>
 </html>
