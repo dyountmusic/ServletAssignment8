@@ -56,13 +56,15 @@ public class MembershipControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        System.out.println("Do get is running...");
         
         String action = request.getParameter("action");
         
         if (action == null) {
             request.setAttribute("actionMessage", "<p>Error! The action parameter is required, only signup value is valid</p>");
+        }
+        
+        if ("profile".equals(action)) {
+            response.sendRedirect("profile.jsp");
         }
 
         if ("signup".equals(action)) {
@@ -87,7 +89,6 @@ public class MembershipControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Do Post is running...");
    
         String action = request.getParameter("action");
         
