@@ -59,6 +59,8 @@ public class MembershipControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String action = request.getParameter("action");
+        String color = request.getParameter("color");
+        String pageColor;
         
         if (action == null) {
             request.setAttribute("actionMessage", "<p>Error! The action parameter is required, only signup value is valid</p>");
@@ -74,6 +76,16 @@ public class MembershipControllerServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/signup.jsp").forward(request, response);
         } else {
             request.setAttribute("actionMessage", "<p>Error! The action parameter is required, only signup value is valid</p>");
+        }
+        
+        
+        
+        if ((color == null) && ("".equals(color))) {
+            // Not a workable value passed in setting default
+            pageColor = "White";
+        } else {
+            pageColor = color;
+            
         }
         
         processRequest(request, response);

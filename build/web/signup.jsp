@@ -11,6 +11,9 @@
         <link rel="stylesheet" type="text/css" href="main.css">
 </head>  
 <body >
+    <a href="membership?action=signup&color=White">White</a>
+    <a href="membership?action=signup&color=Red">Red</a>
+    <a href="membership?action=signup&color=Blue">Blue</a>
 	<header>Registration Form</header>  
 	<main>
 		<form action="/dyount2Ex8/membership?action=signup" name="registration" method="post">  
