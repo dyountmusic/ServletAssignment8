@@ -31,25 +31,6 @@ public class MembershipControllerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String pageColor = request.getParameter("color");
-        String action = request.getParameter("action");
-        
-        HttpSession session = request.getSession(true);
-        
-        Cookie cookie = null;
-        if (pageColor == null || pageColor == "") {
-            // defualt white color 
-            cookie = new Cookie("backgroundColor", "White");
-        } else {
-            // set color in cookies
-            cookie = new Cookie("backgroundColor", pageColor);
-        }
-        
-        response.addCookie(cookie);
-        
-        session.setAttribute("color", pageColor);
-        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -57,8 +38,8 @@ public class MembershipControllerServlet extends HttpServlet {
             out.println("<head>");
             out.println("</head>");
             out.println("<body>");
-            String actionmsg = request.getAttribute("actionMessage").toString();
-            out.println(actionmsg);
+            String action = request.getAttribute("actionMessage").toString();
+            out.println(action);
             out.println("</body>");
             out.println("</html>");
         }
@@ -83,17 +64,16 @@ public class MembershipControllerServlet extends HttpServlet {
             request.setAttribute("actionMessage", "<p>Error! The action parameter is required, only signup value is valid</p>");
         }
         
+        if ("profile".equals(action)) {
+            response.sendRedirect("profile.jsp");
+        }
+
         if ("signup".equals(action)) {
             System.out.println("Throwing to signup jsp");
             
             getServletContext().getRequestDispatcher("/signup.jsp").forward(request, response);
         } else {
             request.setAttribute("actionMessage", "<p>Error! The action parameter is required, only signup value is valid</p>");
-        }
-        
-        if (action.equals("profile")) {
-                String url = "/profile.jsp";
-                getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         
         processRequest(request, response);
