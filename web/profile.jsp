@@ -7,16 +7,24 @@
 <%@page import="edu.uncc.nbad.UserInfo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%      
+            // read UserInfo java bean from httpSession object
+            UserInfo userInfo = (UserInfo)session.getAttribute("userInfo");
+            // read backgroundColor from httpSession object
+            String color = (String)session.getAttribute("color");
+            
+        %>
+        
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
-        <%    
-            // read UserInfo java bean from httpSession object
-            UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-        %>
+    <body bgcolor="${cookie['backgroundColor']}">
+        <a href="membership?action=profile&color=White">White</a>
+        <a href="membership?action=profile&color=Red">Red</a>
+        <a href="membership?action=profile&color=Blue">Blue</a>
         <p>name: ${userInfo.getName()}</p>
         <p>username: ${userInfo.getUsername()}</p>
         <p>password: ${userInfo.getPassid()}</p>
